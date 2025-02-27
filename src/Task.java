@@ -14,6 +14,13 @@ public class Task {
         this.status = status;
     }
 
+    //id и статус по умолчанию
+    public Task(String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.status = TaskStatus.NEW; // по умолчанию
+    }
+
     public int getId() {
         return id;
     }
