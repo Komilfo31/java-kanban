@@ -1,4 +1,9 @@
+package ru.yandex.test;
+
+import ru.yandex.taskmanager.model.Subtask;
 import org.junit.jupiter.api.Test;
+import ru.yandex.taskmanager.model.TaskStatus;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SubtaskTest {

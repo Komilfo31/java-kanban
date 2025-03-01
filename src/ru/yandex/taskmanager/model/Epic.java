@@ -1,7 +1,10 @@
+package ru.yandex.taskmanager.model;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Epic extends Task {
-    private ArrayList<Integer> subtaskIds;
+    private List<Integer> subtaskIds;
 
     public Epic(int id, String name, String description, TaskStatus status) {
         super(id, name, description, status);
@@ -13,7 +16,7 @@ public class Epic extends Task {
         this.subtaskIds = new ArrayList<>();
     }
 
-    public ArrayList<Integer> getSubtaskIds() {
+    public List<Integer> getSubtaskIds() {
 
         return subtaskIds;
     }
@@ -38,7 +41,6 @@ public class Epic extends Task {
                 ", subtaskIds=" + subtaskIds +
                 '}';
     }
-
 
 
 }

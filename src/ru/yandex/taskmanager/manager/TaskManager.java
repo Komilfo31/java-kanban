@@ -1,33 +1,54 @@
-import java.util.ArrayList;
+package ru.yandex.taskmanager.manager;
+
+import ru.yandex.taskmanager.model.Epic;
+import ru.yandex.taskmanager.model.Subtask;
+import ru.yandex.taskmanager.model.Task;
+
 import java.util.List;
 
 public interface TaskManager {
     // методы  Task
-    ArrayList<Task> getAllTasks();
+    List<Task> getAllTasks();
+
     void deleteAllTasks();
+
     Task getTaskId(int id);
+
     void createTask(Task task);
+
     void updateTask(Task task);
+
     void deleteTaskId(int id);
 
-    // методы  Subtask
-    ArrayList<Subtask> getAllSubTasks();
+    // методы Subtask
+    List<Subtask> getAllSubTasks();
+
     void deleteAllSubTask();
+
     Subtask getSubTaskId(int id);
+
     void createSubtask(Subtask subtask);
+
     void updateSubtask(Subtask subtask);
+
     void deleteSubtaskId(int id);
 
     // методы Epic
-    ArrayList<Epic> getAllEpics();
+    List<Epic> getAllEpics();
+
     void deleteAllEpics();
+
     Epic getEpicId(int id);
+
     void createEpic(Epic epic);
+
     void updateEpic(Epic epic);
+
     void deleteEpicId(int id);
 
     // доп методы
-    ArrayList<Subtask> getSubtasksEpic(int epicId);
+    List<Subtask> getSubtasksEpic(int epicId);
+
     //история просмотра
     List<Task> getHistory();
 }

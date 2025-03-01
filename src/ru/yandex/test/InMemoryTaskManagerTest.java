@@ -1,13 +1,22 @@
+package ru.yandex.test;
+
+import ru.yandex.taskmanager.manager.TaskManager;
+import ru.yandex.taskmanager.model.Epic;
+import ru.yandex.taskmanager.model.Subtask;
 import org.junit.jupiter.api.Test;
+import ru.yandex.taskmanager.model.Task;
+import ru.yandex.taskmanager.model.TaskStatus;
+import ru.yandex.taskmanager.util.Managers;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest {
     @Test
     void testAddAndFindTasks() {
         TaskManager taskManager = Managers.getDefault();
-        Task task = new Task(1, "Task 1", "Description 1", TaskStatus.NEW);
-        Epic epic = new Epic(2, "Epic 1", "Description 1", TaskStatus.NEW);
-        Subtask subtask = new Subtask(3, "Subtask 1", "Description 1", TaskStatus.NEW, 2);
+        Task task = new Task(1, "ru.yandex.taskmanager.model.Task 1", "Description 1", TaskStatus.NEW);
+        Epic epic = new Epic(2, "ru.yandex.taskmanager.model.Epic 1", "Description 1", TaskStatus.NEW);
+        Subtask subtask = new Subtask(3, "ru.yandex.taskmanager.model.Subtask 1", "Description 1", TaskStatus.NEW, 2);
 
         taskManager.createTask(task);
         taskManager.createEpic(epic);

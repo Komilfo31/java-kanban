@@ -1,3 +1,5 @@
+package ru.yandex.taskmanager.model;
+
 public class Subtask extends Task {
     private int epicId;
 
@@ -6,15 +8,18 @@ public class Subtask extends Task {
         this.epicId = epicId;
     }
 
-    public Subtask(String name, String description, int Id) {
+    public Subtask(String name, String description, int id) {
+
         super(name, description);
     }
 
     public int getEpicId() {
+
         return epicId;
     }
 
     public void setEpicId(int epicId) {
+
         this.epicId = epicId;
     }
 
