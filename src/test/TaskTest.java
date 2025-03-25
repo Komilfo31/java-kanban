@@ -1,4 +1,4 @@
-package ru.yandex.test;
+package test;
 
 import org.junit.jupiter.api.Test;
 import ru.yandex.taskmanager.model.Task;
