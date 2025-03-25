@@ -1,11 +1,11 @@
 package ru.yandex.test;
 
+import org.junit.jupiter.api.Test;
 import ru.yandex.taskmanager.model.Epic;
 import ru.yandex.taskmanager.model.Subtask;
-import org.junit.jupiter.api.Test;
 import ru.yandex.taskmanager.model.TaskStatus;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EpicTest {
 

@@ -5,7 +5,11 @@ import ru.yandex.taskmanager.model.Subtask;
 import ru.yandex.taskmanager.model.Task;
 import ru.yandex.taskmanager.model.TaskStatus;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class InMemoryTaskManager implements TaskManager {
     private final Map<Integer, Task> tasks = new HashMap<>(); // задачи

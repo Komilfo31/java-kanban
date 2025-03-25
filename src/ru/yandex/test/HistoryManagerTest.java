@@ -6,7 +6,7 @@ import ru.yandex.taskmanager.model.Task;
 import ru.yandex.taskmanager.model.TaskStatus;
 import ru.yandex.taskmanager.util.Managers;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HistoryManagerTest {
     @Test

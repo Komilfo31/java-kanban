@@ -11,6 +11,7 @@ public class Epic extends Task {
         this.subtaskIds = new ArrayList<>();
     }
 
+    //конструктор для тестов, по другому пока не понял как реализовать
     public Epic(String name, String description) {
         super(name, description);
         this.subtaskIds = new ArrayList<>();

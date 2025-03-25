@@ -5,7 +5,7 @@ import ru.yandex.taskmanager.manager.HistoryManager;
 import ru.yandex.taskmanager.manager.TaskManager;
 import ru.yandex.taskmanager.util.Managers;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class ManagersTest {
     @Test

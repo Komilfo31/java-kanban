@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 import ru.yandex.taskmanager.model.Task;
 import ru.yandex.taskmanager.model.TaskStatus;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class TaskTest {
     @Test
@@ -13,4 +14,6 @@ class TaskTest {
         Task task2 = new Task(1, "Task 2", "Description 2", TaskStatus.IN_PROGRESS);
         assertEquals(task1, task2, "Задачи с одинаковым id должны быть равны");
     }
+
+
 }
