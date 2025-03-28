@@ -16,8 +16,8 @@ public class Main {
 
 
         Epic epic1 = new Epic("Переезд", "Организовать переезд в новую квартиру");
-        Subtask subtask1 = new Subtask("Упаковать вещи", "Коробки, скотч, маркер", epic1.getId());
-        Subtask subtask2 = new Subtask("Нанять грузчиков", "Найти через приложение", epic1.getId());
+        Subtask subtask1 = new Subtask("Упаковать вещи", "Коробки, скотч, маркер");
+        Subtask subtask2 = new Subtask("Нанять грузчиков", "Найти через приложение");
 
 
         taskManager.createTask(task1);

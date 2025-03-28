@@ -1,10 +1,10 @@
-package ru.yandex.test;
+package ru.yandex.taskmanager;
 
-import ru.yandex.taskmanager.model.Subtask;
 import org.junit.jupiter.api.Test;
+import ru.yandex.taskmanager.model.Subtask;
 import ru.yandex.taskmanager.model.TaskStatus;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SubtaskTest {
     @Test

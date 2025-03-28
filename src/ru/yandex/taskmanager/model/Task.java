@@ -23,6 +23,12 @@ public class Task {
         this.status = TaskStatus.NEW; // по умолчанию
     }
 
+
+
+    //для тестов
+    public Task(int i, String s, String s1) {
+    }
+
     public int getId() {
         return id;
     }

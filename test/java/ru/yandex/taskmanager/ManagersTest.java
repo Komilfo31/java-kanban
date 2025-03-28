@@ -1,11 +1,11 @@
-package ru.yandex.test;
+package ru.yandex.taskmanager;
 
 import org.junit.jupiter.api.Test;
 import ru.yandex.taskmanager.manager.HistoryManager;
 import ru.yandex.taskmanager.manager.TaskManager;
 import ru.yandex.taskmanager.util.Managers;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class ManagersTest {
     @Test

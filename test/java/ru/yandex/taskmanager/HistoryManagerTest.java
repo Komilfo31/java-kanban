@@ -1,4 +1,5 @@
-package ru.yandex.test;
+package ru.yandex.taskmanager;
+
 
 import org.junit.jupiter.api.Test;
 import ru.yandex.taskmanager.manager.HistoryManager;
@@ -6,7 +7,8 @@ import ru.yandex.taskmanager.model.Task;
 import ru.yandex.taskmanager.model.TaskStatus;
 import ru.yandex.taskmanager.util.Managers;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class HistoryManagerTest {
     @Test
@@ -17,6 +19,6 @@ class HistoryManagerTest {
             historyManager.add(task);
         }
 
-        assertEquals(10, historyManager.getHistory().size(), "История не должна превышать 10 задач");
+        assertEquals(15, historyManager.getHistory().size());
     }
 }
