@@ -5,7 +5,6 @@ import ru.yandex.taskmanager.model.Epic;
 import ru.yandex.taskmanager.model.Subtask;
 import ru.yandex.taskmanager.model.Task;
 import ru.yandex.taskmanager.model.TaskStatus;
-import ru.yandex.taskmanager.manager.ManagerSaveException;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,7 +33,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
         super(historyManager);
         this.file = file;
     }
-
 
 
     public void save() {
@@ -134,7 +132,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
                     try {
                         endTime = LocalDateTime.parse(endTimeString, DATE_TIME_FORMATTER);
                     } catch (Exception e) {
-                                                System.err.println("Неверный формат времени окончания: " + endTimeString);
+                        System.err.println("Неверный формат времени окончания: " + endTimeString);
                     }
                 }
             }
@@ -157,7 +155,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
         }
     }
 
-    public  void loadFromFile() {
+    public void loadFromFile() {
         if (!Files.exists(file)) {
             return;
         }
