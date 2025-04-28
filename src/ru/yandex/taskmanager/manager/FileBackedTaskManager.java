@@ -5,6 +5,7 @@ import ru.yandex.taskmanager.model.Epic;
 import ru.yandex.taskmanager.model.Subtask;
 import ru.yandex.taskmanager.model.Task;
 import ru.yandex.taskmanager.model.TaskStatus;
+import ru.yandex.taskmanager.manager.ManagerSaveException;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,6 +23,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
     private Path file = Paths.get("tasks.csv");
     private static final String CSV_HEADER = "id,type,name,status,description,epic,duration,startTime,endTime\n";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+
+    static class ManagerSaveException extends RuntimeException {
+        public ManagerSaveException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
 
     public FileBackedTaskManager(HistoryManager historyManager, Path file) {
         super(historyManager);
