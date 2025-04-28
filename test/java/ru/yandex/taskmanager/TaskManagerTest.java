@@ -1,6 +1,9 @@
 package test.java.ru.yandex.taskmanager;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import ru.yandex.taskmanager.manager.FileBackedTaskManager;
 import ru.yandex.taskmanager.manager.InMemoryHistoryManager;
 import ru.yandex.taskmanager.manager.InMemoryTaskManager;
@@ -18,6 +21,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 public abstract class TaskManagerTest<T extends TaskManager> {
@@ -116,7 +121,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
 
 
             boolean hasOverlap = isTasksOverlap(task1, task2);
-            Assertions.assertTrue(hasOverlap, "Задачи должны пересекаться по времени");
+            assertTrue(hasOverlap, "Задачи должны пересекаться по времени");
         }
 
         @Test
@@ -132,7 +137,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
 
 
             boolean hasOverlap = isTasksOverlap(task1, task2);
-            Assertions.assertFalse(hasOverlap, "Задачи НЕ должны пересекаться по времени");
+            assertFalse(hasOverlap, "Задачи НЕ должны пересекаться по времени");
         }
 
 
@@ -152,7 +157,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     class HistoryTests {
         @Test
         void testEmptyHistory() {
-            Assertions.assertTrue(taskManager.getHistory().isEmpty(), "История должна быть пустой");
+            assertTrue(taskManager.getHistory().isEmpty(), "История должна быть пустой");
         }
 
         @Test
@@ -202,7 +207,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
 
             // Удаление из конца
             taskManager.deleteEpicId(epic.getId());
-            Assertions.assertTrue(taskManager.getHistory().isEmpty(), "Не удалилась задача из конца");
+            assertTrue(taskManager.getHistory().isEmpty(), "Не удалилась задача из конца");
         }
     }
 }

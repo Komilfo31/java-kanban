@@ -55,7 +55,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
 
 
         String type = getTaskType(task);
-        String durationStr = task.getDuration() != null ? String.valueOf(task.getDuration().toMinutes()) : "";
+        String durationStr = task.getDuration() != null ? String.valueOf(task.getDuration().toSeconds()) : "";
         String startTimeStr = task.getStartTime() != null ? task.getStartTime().format(DATE_TIME_FORMATTER) : "";
         String endTimeStr = "";
 
