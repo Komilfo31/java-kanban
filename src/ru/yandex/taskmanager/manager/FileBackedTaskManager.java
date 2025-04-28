@@ -23,11 +23,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
     private static final String CSV_HEADER = "id,type,name,status,description,epic,duration,startTime,endTime\n";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
-    static class ManagerSaveException extends RuntimeException {
-        public ManagerSaveException(String message, Throwable cause) {
-            super(message, cause);
-        }
-    }
 
     public FileBackedTaskManager(HistoryManager historyManager, Path file) {
         super(historyManager);
