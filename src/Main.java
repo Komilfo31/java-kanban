@@ -2,6 +2,7 @@ import ru.yandex.taskmanager.manager.TaskManager;
 import ru.yandex.taskmanager.model.Epic;
 import ru.yandex.taskmanager.model.Subtask;
 import ru.yandex.taskmanager.model.Task;
+import ru.yandex.taskmanager.model.TaskStatus;
 import ru.yandex.taskmanager.util.Managers;
 
 public class Main {
@@ -16,8 +17,22 @@ public class Main {
 
 
         Epic epic1 = new Epic("Переезд", "Организовать переезд в новую квартиру");
-        Subtask subtask1 = new Subtask("Упаковать вещи", "Коробки, скотч, маркер");
-        Subtask subtask2 = new Subtask("Нанять грузчиков", "Найти через приложение");
+        taskManager.createEpic(epic1);  //сохраняем эпик, чтобы у него был id
+
+
+        Subtask subtask1 = new Subtask(
+                epic1.getId(),
+                "Упаковать вещи",
+                "Коробки, скотч, маркер",
+                TaskStatus.NEW
+                );
+
+        Subtask subtask2 = new Subtask(
+                epic1.getId(),
+                "Нанять грузчиков",
+                "Найти через приложение",
+                TaskStatus.NEW
+                );
 
 
         taskManager.createTask(task1);
