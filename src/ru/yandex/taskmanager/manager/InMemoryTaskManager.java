@@ -5,10 +5,13 @@ import ru.yandex.taskmanager.model.Subtask;
 import ru.yandex.taskmanager.model.Task;
 import ru.yandex.taskmanager.model.TaskStatus;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class InMemoryTaskManager implements TaskManager {
@@ -25,6 +28,51 @@ public class InMemoryTaskManager implements TaskManager {
 
     private int generateId() {
         return nextId++;
+    }
+
+    //проверка пересечения двух задач
+    private boolean isTasksOverlap(Task task1, Task task2) {
+        if (task1.getStartTime() == null || task2.getStartTime() == null) {
+            return false;
+        }
+
+        LocalDateTime start1 = task1.getStartTime();
+        LocalDateTime end1 = task1.getEndTime();
+        LocalDateTime start2 = task2.getStartTime();
+        LocalDateTime end2 = task2.getEndTime();
+
+        return start1.isBefore(end2) && start2.isBefore(end1);
+    }
+
+    //пересечения задачи с другими
+    private boolean hasTimeOverlap(Task newTask) {
+        if (newTask.getStartTime() == null) {
+            return false;
+        }
+
+        return getPrioritizedTasks().stream()
+                .filter(task -> !task.equals(newTask))
+                .anyMatch(existingTask -> isTasksOverlap(newTask, existingTask));
+    }
+
+    @Override
+    public List<Task> getPrioritizedTasks() {
+        //компаратор для сортировки по startTime
+        Comparator<Task> taskComparator = Comparator.comparing(
+                Task::getStartTime,
+                Comparator.nullsLast(Comparator.naturalOrder())
+        );
+
+        //все задачи в один список
+        List<Task> allTasks = new ArrayList<>();
+        allTasks.addAll(tasks.values());
+        allTasks.addAll(subtasks.values());
+
+        // Сорт и фильтр задачи с null startTime
+        return allTasks.stream()
+                .filter(task -> task.getStartTime() != null)
+                .sorted(taskComparator)
+                .collect(Collectors.toList());
     }
 
     // Методы для Task
@@ -63,6 +111,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteTaskId(int id) {
         tasks.remove(id);
+        historyManager.remove(id);
     }
 
     // Методы для Subtask
@@ -74,10 +123,10 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteAllSubTask() {
         subtasks.clear();
-        for (Epic epic : epics.values()) {
+        epics.values().forEach(epic -> {
             epic.getSubtaskIds().clear();
             updateEpicStatus(epic.getId());
-        }
+        });
     }
 
     @Override
@@ -118,6 +167,7 @@ public class InMemoryTaskManager implements TaskManager {
                 epic.removeSubtask(id);
                 updateEpicStatus(epic.getId());
             }
+            historyManager.remove(id);
         }
     }
 
@@ -160,26 +210,18 @@ public class InMemoryTaskManager implements TaskManager {
     public void deleteEpicId(int id) {
         Epic epic = epics.remove(id);
         if (epic != null) {
-            for (int subtaskId : epic.getSubtaskIds()) {
-                subtasks.remove(subtaskId);
-            }
+            epic.getSubtaskIds().forEach(subtasks::remove);
         }
+        historyManager.remove(id);
     }
 
     // Дополнительные методы
     @Override
     public List<Subtask> getSubtasksEpic(int epicId) {
-        List<Subtask> result = new ArrayList<>();
-        Epic epic = epics.get(epicId);
-        if (epic != null) {
-            for (int subtaskId : epic.getSubtaskIds()) {
-                Subtask subtask = subtasks.get(subtaskId);
-                if (subtask != null) {
-                    result.add(subtask);
-                }
-            }
-        }
-        return result;
+        return epics.getOrDefault(epicId, new Epic(0, "", "", TaskStatus.NEW))
+                .getSubtaskIds().stream()
+                .map(subtasks::get)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -189,29 +231,44 @@ public class InMemoryTaskManager implements TaskManager {
 
     private void updateEpicStatus(int epicId) {
         Epic epic = epics.get(epicId);
-        if (epic != null) {
-            boolean allDone = true;
-            boolean anyInProgress = false;
+        if (epic == null) {
+            return;
+        }
 
-            for (int subtaskId : epic.getSubtaskIds()) {
-                Subtask subtask = subtasks.get(subtaskId);
-                if (subtask != null) {
-                    if (subtask.getStatus() != TaskStatus.DONE) {
-                        allDone = false;
-                    }
-                    if (subtask.getStatus() == TaskStatus.IN_PROGRESS) {
-                        anyInProgress = true;
-                    }
-                }
+        List<Subtask> epicSubtasks = getSubtasksEpic(epicId);
+
+        // Если нет подзадач - статус NEW
+        if (epicSubtasks.isEmpty()) {
+            epic.setStatus(TaskStatus.NEW);
+            return;
+        }
+
+        boolean allNew = true;
+        boolean allDone = true;
+
+        for (Subtask subtask : epicSubtasks) {
+            TaskStatus status = subtask.getStatus();
+
+            if (status != TaskStatus.NEW) {
+                allNew = false;
+            }
+            if (status != TaskStatus.DONE) {
+                allDone = false;
             }
 
-            if (allDone) {
-                epic.setStatus(TaskStatus.DONE);
-            } else if (anyInProgress) {
+
+            if (status == TaskStatus.IN_PROGRESS) {
                 epic.setStatus(TaskStatus.IN_PROGRESS);
-            } else {
-                epic.setStatus(TaskStatus.NEW);
+                return;
             }
+        }
+
+        if (allDone) {
+            epic.setStatus(TaskStatus.DONE);
+        } else if (allNew) {
+            epic.setStatus(TaskStatus.NEW);
+        } else {
+            epic.setStatus(TaskStatus.IN_PROGRESS);
         }
     }
 }

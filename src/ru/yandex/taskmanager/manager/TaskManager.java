@@ -7,6 +7,8 @@ import ru.yandex.taskmanager.model.Task;
 import java.util.List;
 
 public interface TaskManager {
+    List<Task> getPrioritizedTasks();
+
     // методы  Task
     List<Task> getAllTasks();
 

@@ -1,21 +1,27 @@
 package ru.yandex.taskmanager.model;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Epic extends Task {
     private List<Integer> subtaskIds;
+    private LocalDateTime endTime;
 
     public Epic(int id, String name, String description, TaskStatus status) {
         super(id, name, description, status);
         this.subtaskIds = new ArrayList<>();
     }
 
-    //конструктор для тестов, по другому пока не понял как реализовать
-    public Epic(String name, String description) {
-        super(name, description);
+
+    public Epic(int id, String name, String description, TaskStatus status,
+                Duration duration, LocalDateTime startTime, LocalDateTime endTime) {
+        super(id, name, description, status, duration, startTime);
         this.subtaskIds = new ArrayList<>();
+        this.endTime = endTime;
     }
+
 
     public List<Integer> getSubtaskIds() {
 
@@ -41,6 +47,25 @@ public class Epic extends Task {
                 ", status=" + getStatus() +
                 ", subtaskIds=" + subtaskIds +
                 '}';
+    }
+
+    @Override
+    public Duration getDuration() {
+        return super.getDuration();
+    }
+
+    @Override
+    public LocalDateTime getStartTime() {
+        return super.getStartTime();
+    }
+
+    @Override
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 
 
