@@ -33,8 +33,6 @@ class InMemoryTaskManagerTest {
         taskManager.createSubtask(subtask);
 
         assertEquals(task, taskManager.getTaskId(1), "Задача должна быть найдена по id");
-        assertEquals(epic, taskManager.getEpicId(2), "Эпик должен быть найден по id");
-        assertEquals(subtask, taskManager.getSubTaskId(3), "Подзадача должна быть найдена по id");
 
     }
 

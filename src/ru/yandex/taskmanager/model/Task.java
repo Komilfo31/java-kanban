@@ -33,7 +33,7 @@ public class Task {
     public Task(int id, String name, String description, TaskStatus status,
                 Duration duration, LocalDateTime startTime) {
         this(id, name, description, status);
-        this.duration = duration;
+        this.duration = duration != null ? duration : Duration.ZERO;
         this.startTime = startTime;
     }
 
