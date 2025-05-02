@@ -1,5 +1,8 @@
 package ru.yandex.taskmanager.model;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class Subtask extends Task {
     private int epicId;
 
@@ -8,8 +11,10 @@ public class Subtask extends Task {
         this.epicId = epicId;
     }
 
-    public Subtask(int id, String name, String description, TaskStatus status) {
-        super(id, name, description, status);
+    public Subtask(int id, String name, String description, TaskStatus status,
+                   int epicId, Duration duration, LocalDateTime startTime) {
+        super(id, name, description, status, duration, startTime);
+        this.epicId = epicId;
     }
 
 

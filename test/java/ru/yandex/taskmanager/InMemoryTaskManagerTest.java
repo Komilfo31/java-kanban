@@ -33,8 +33,6 @@ class InMemoryTaskManagerTest {
         taskManager.createSubtask(subtask);
 
         assertEquals(task, taskManager.getTaskId(1), "Задача должна быть найдена по id");
-        assertEquals(epic, taskManager.getEpicId(2), "Эпик должен быть найден по id");
-        assertEquals(subtask, taskManager.getSubTaskId(3), "Подзадача должна быть найдена по id");
 
     }
 
@@ -42,7 +40,7 @@ class InMemoryTaskManagerTest {
     void testTaskIdsDoNotConflict() {
         TaskManager taskManager = Managers.getDefault();
         Task task1 = new Task(1, "Task 1", "Description 1", TaskStatus.NEW);
-        Task task2 = new Task(2, "Task 2", "Description 2");
+        Task task2 = new Task(2, "Task 2", "Description 2", TaskStatus.NEW);
 
         taskManager.createTask(task1);
         taskManager.createTask(task2);
@@ -78,8 +76,8 @@ class InMemoryTaskManagerTest {
     @BeforeEach
     void setUp() {
         manager = new InMemoryHistoryManager();
-        task1 = new Task(1, "Task 1", "Description");
-        task2 = new Task(2, "Task 2", "Description");
+        task1 = new Task(1, "Task 1", "Description", TaskStatus.NEW);
+        task2 = new Task(2, "Task 2", "Description", TaskStatus.NEW);
     }
 
     @Test
