@@ -62,7 +62,6 @@ public class FileBackedTaskManagerTest {
     void testSaveAndLoadTasks() throws IOException {
         Files.write(tempFile, new byte[0]);
 
-
         Epic epic = new Epic(1, "Тестовый эпик", "Описание эпика", TaskStatus.NEW,
                 Duration.ZERO, LocalDateTime.now(), null);
         manager.createEpic(epic);
