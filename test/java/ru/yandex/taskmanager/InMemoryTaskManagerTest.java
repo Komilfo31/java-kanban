@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.yandex.taskmanager.manager.HistoryManager;
 import ru.yandex.taskmanager.manager.InMemoryHistoryManager;
+import ru.yandex.taskmanager.manager.NotFoundException;
 import ru.yandex.taskmanager.manager.TaskManager;
 import ru.yandex.taskmanager.model.Epic;
 import ru.yandex.taskmanager.model.Subtask;
@@ -22,7 +23,7 @@ class InMemoryTaskManagerTest {
     private Task task2;
 
     @Test
-    void testAddAndFindTasks() {
+    void testAddAndFindTasks() throws NotFoundException {
         TaskManager taskManager = Managers.getDefault();
         Task task = new Task(1, "Task 1", "Description 1", TaskStatus.NEW);
         Epic epic = new Epic(2, "Epic 1", "Description 1", TaskStatus.NEW);
@@ -49,7 +50,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void testTaskImmutabilityWhenAdded() {
+    void testTaskImmutabilityWhenAdded() throws NotFoundException {
         TaskManager taskManager = Managers.getDefault();
         Task task = new Task(1, "Task 1", "Description 1", TaskStatus.NEW);
 
@@ -62,7 +63,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void testTaskDeletion() {
+    void testTaskDeletion() throws NotFoundException {
         TaskManager taskManager = Managers.getDefault();
         Task task = new Task(1, "Task 1", "Description 1", TaskStatus.NEW);
 

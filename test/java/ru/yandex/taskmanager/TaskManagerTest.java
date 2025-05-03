@@ -4,10 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import ru.yandex.taskmanager.manager.FileBackedTaskManager;
-import ru.yandex.taskmanager.manager.InMemoryHistoryManager;
-import ru.yandex.taskmanager.manager.InMemoryTaskManager;
-import ru.yandex.taskmanager.manager.TaskManager;
+import ru.yandex.taskmanager.manager.*;
 import ru.yandex.taskmanager.model.Epic;
 import ru.yandex.taskmanager.model.Subtask;
 import ru.yandex.taskmanager.model.Task;
@@ -20,7 +17,9 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 public abstract class TaskManagerTest<T extends TaskManager> {
@@ -53,14 +52,14 @@ public abstract class TaskManagerTest<T extends TaskManager> {
 
     /* Общие тесты для TaskManager */
     @Test
-    void testCreateAndGetTask() {
+    void testCreateAndGetTask() throws NotFoundException {
         taskManager.createTask(task1);
         Task savedTask = taskManager.getTaskId(task1.getId());
         assertEquals(task1, savedTask, "Задачи не совпадают");
     }
 
     @Test
-    void testCreateAndGetEpic() {
+    void testCreateAndGetEpic() throws NotFoundException {
         Epic newEpic = new Epic(7, "New Epic", "Desc", TaskStatus.NEW);
         taskManager.createEpic(newEpic);
         Epic savedEpic = taskManager.getEpicId(newEpic.getId());
@@ -123,7 +122,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
         }
 
         @Test
-        void testHistoryWithDuplicates() {
+        void testHistoryWithDuplicates() throws NotFoundException {
             taskManager.createTask(task1);
             taskManager.getTaskId(task1.getId());
             taskManager.getTaskId(task1.getId());
@@ -133,7 +132,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
         }
 
         @Test
-        void testHistoryOrder() {
+        void testHistoryOrder() throws NotFoundException {
             taskManager.createTask(task1);
             taskManager.createEpic(epic);
 
@@ -147,7 +146,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
         }
 
         @Test
-        void testRemoveFromHistory() {
+        void testRemoveFromHistory() throws NotFoundException {
             taskManager.createTask(task1);
             taskManager.createTask(task2);
             taskManager.createEpic(epic);
