@@ -14,7 +14,7 @@ public interface TaskManager {
 
     void deleteAllTasks();
 
-    Task getTaskId(int id) throws NotFoundException;;
+    Task getTaskId(int id) throws NotFoundException;
 
     void createTask(Task task);
 

@@ -6,15 +6,8 @@ import ru.yandex.taskmanager.model.Task;
 import ru.yandex.taskmanager.model.TaskStatus;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.ArrayList;
-import java.util.List;
-
 
 
 public class InMemoryTaskManager implements TaskManager {

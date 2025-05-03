@@ -67,8 +67,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
                 task.getStatus().name() + "," +
                 task.getDescription();
 
-        if (task instanceof Epic) {
-            Epic epic = (Epic) task;
+        if (task instanceof Epic epic) {
             endTimeStr = epic.getEndTime() != null ? epic.getEndTime().toString() : "";
         }
 
@@ -233,7 +232,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
                 .orElse(null);
         epic.setEndTime(latestEnd);
     }
-
 
 
     @Override
