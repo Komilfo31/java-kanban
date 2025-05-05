@@ -67,8 +67,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
                 task.getStatus().name() + "," +
                 task.getDescription();
 
-        if (task instanceof Epic) {
-            Epic epic = (Epic) task;
+        if (task instanceof Epic epic) {
             endTimeStr = epic.getEndTime() != null ? epic.getEndTime().toString() : "";
         }
 
@@ -94,14 +93,14 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
             throw new ManagerSaveException("Недостаточно данных в строке: " + value);
         }
 
-        // Основные обязательные поля
+
         TypeTask type = TypeTask.valueOf(parts[1]);
         int id = Integer.parseInt(parts[0]);
         String name = parts[2];
         TaskStatus status = TaskStatus.valueOf(parts[3]);
         String description = parts[4];
 
-        // Обработка дополнительных полей
+
         Duration duration = parseDuration(parts.length > 6 ? parts[6] : null);
         LocalDateTime startTime = parseDateTime(parts.length > 7 ? parts[7] : null);
         LocalDateTime endTime = type == TypeTask.EPIC && parts.length > 8
@@ -121,7 +120,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
         }
     }
 
-    // Вспомогательные методы для парсинга
+    //методы для парсинга
     private static Duration parseDuration(String durationStr) {
         if (durationStr == null || durationStr.isEmpty()) {
             return null;
@@ -233,7 +232,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
                 .orElse(null);
         epic.setEndTime(latestEnd);
     }
-
 
 
     @Override

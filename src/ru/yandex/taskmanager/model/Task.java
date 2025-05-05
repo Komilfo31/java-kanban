@@ -28,7 +28,6 @@ public class Task {
     }
 
 
-
     //для тестов
     public Task(int id, String name, String description, TaskStatus status,
                 Duration duration, LocalDateTime startTime) {

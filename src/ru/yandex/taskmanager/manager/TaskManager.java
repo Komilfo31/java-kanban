@@ -14,7 +14,7 @@ public interface TaskManager {
 
     void deleteAllTasks();
 
-    Task getTaskId(int id);
+    Task getTaskId(int id) throws NotFoundException;
 
     void createTask(Task task);
 
@@ -27,7 +27,7 @@ public interface TaskManager {
 
     void deleteAllSubTask();
 
-    Subtask getSubTaskId(int id);
+    Subtask getSubTaskId(int id) throws NotFoundException;
 
     void createSubtask(Subtask subtask);
 
@@ -40,7 +40,7 @@ public interface TaskManager {
 
     void deleteAllEpics();
 
-    Epic getEpicId(int id);
+    Epic getEpicId(int id) throws NotFoundException;
 
     void createEpic(Epic epic);
 

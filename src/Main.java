@@ -1,14 +1,16 @@
+import ru.yandex.taskmanager.manager.NotFoundException;
 import ru.yandex.taskmanager.manager.TaskManager;
 import ru.yandex.taskmanager.model.Epic;
 import ru.yandex.taskmanager.model.Subtask;
 import ru.yandex.taskmanager.model.Task;
 import ru.yandex.taskmanager.model.TaskStatus;
 import ru.yandex.taskmanager.util.Managers;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NotFoundException {
         TaskManager taskManager = Managers.getDefault();
 
         // задачи с временными параметрами
